@@ -74,7 +74,7 @@ ticket.Container.addEventListener("dblclick", (event) => {
     const priorityInput = document.createElement("select");
     priorityInput.innerHTML = '
     <option value="High">High</option>
-    <option value="Medium>Medium</option>
+    <option value="Medium">Medium</option>
     <option value="Low">Low</option>
     ';
     priorityInput.value = priorityLabel.textContent.reaplce("Priority: ", "");
