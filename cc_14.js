@@ -51,3 +51,54 @@ ticketContainer.addEventListener("click", (event) => {
         console.log("Support ticket clicked"); //Log message when ticket is clicked
     };
 });
+
+// Task 5 - Inline Editing of Support Tickets
+
+ticket.Container.addEventListener("dblclick", (event) => {
+    const ticket = event.target.closest(".ticket");
+    if(!ticket) return; //Swap static content with double click
+
+    //Pre populate input fields
+    const heading = ticket.querySelector("h3");
+    const paragraph = ticket.querySelector("p");
+    const priorityLabel = ticket.querySelector("label");
+
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.value = heading.textContent; //Replacing static text with input fields
+
+    const issueInput = document.createElement("input");
+    issueInput.type = "text";
+    issueInput.value = paragraph.textContent;
+
+    const priorityInput = document.createElement("select");
+    priorityInput.innerHTML = '
+    <option value="High">High</option>
+    <option value="Medium>Medium</option>
+    <option value="Low">Low</option>
+    ';
+    priorityInput.value = priorityLabel.textContent.reaplce("Priority: ", "");
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+
+    //Allow user updates
+    ticket.innerHTML = "";
+    ticket.appendChild(nameInput);
+    ticket.appendChild(issueInput);
+    ticket.appendChild(priorityInput);
+    ticket.appendChild(saveButton);
+
+    //Save button that updates new values
+    saveButton.addEventListener("click", () => {
+        heading.textContent = nameInput.value;
+        paragraph.textContent = issueInput.value;
+        priorityLabel.textContent = 'Priority; ${priorityInput.value}';
+
+        ticket.innerHTML = "";
+        ticket.appendChild(heading);
+        ticket.appendChild(paragraph);
+        ticket.appendChild(priorityLabel);
+        ticket.appendCHild(document.createElement ("button").textContent = "Resolve"); //Resolved button
+        });
+});
